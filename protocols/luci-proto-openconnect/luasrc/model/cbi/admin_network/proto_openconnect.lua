@@ -3,7 +3,7 @@
 
 local map, section, net = ...
 
-local server, username, password, cert, ca
+local server, username, password, cert, ca, advanced_options
 local oc_cert_file, oc_key_file, oc_ca_file
 
 local ifc = net:get_interface():name()
@@ -88,3 +88,5 @@ end
 mtu = section:taboption("advanced", Value, "mtu", translate("Override MTU"))
 mtu.placeholder = "1406"
 mtu.datatype    = "max(9200)"
+
+advanced_options = section:taboption("advanced", Value, "advanced_options", translate("It will be passed to openconnect command line"))
