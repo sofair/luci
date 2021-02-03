@@ -23,7 +23,7 @@ module "luci.model.network"
 
 IFACE_PATTERNS_VIRTUAL  = { }
 IFACE_PATTERNS_IGNORE   = { "^wmaster%d", "^wifi%d", "^hwsim%d", "^imq%d", "^ifb%d", "^mon%.wlan%d", "^sit%d", "^gre%d", "^gretap%d", "^ip6gre%d", "^ip6tnl%d", "^tunl%d", "^lo$" }
-IFACE_PATTERNS_WIRELESS = { "^wlan%d", "^wl%d", "^ath%d", "^rausb%d", "^rai%d", "^ra%d", "^wdsi%d", "^wds%d", "^apclii%d", "^apcli%d", "^apcliusb%d", "^%w+%.network%d" }
+IFACE_PATTERNS_WIRELESS = { "^wlan%d", "^wl%d", "^ath%d", "^rausb%d", "^rai%d", "^rax%d", "^ra%d", "^wdsi%d", "^wdsx%d", "^wds%d", "^apclii%d", "^apclix%d", "^apcli%d", "^apcliusb%d", "^%w+%.network%d" }
 
 
 protocol = utl.class()
@@ -1598,7 +1598,7 @@ end
 
 function wifinet.channel(self)
 	return self.iwinfo.channel or self:ubus("dev", "config", "channel") or
-		tonumber(self:get("channel"))
+		tonumber(self:get("channel") or "")
 end
 
 function wifinet.signal(self)
@@ -1610,7 +1610,7 @@ function wifinet.noise(self)
 end
 
 function wifinet.country(self)
-	return self.iwinfo.country or self:ubus("dev", "config", "country") or "00"
+	return self.iwinfo.country or self:ubus("dev", "config", "country") or "US"
 end
 
 function wifinet.txpower(self)
